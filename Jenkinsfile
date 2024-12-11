@@ -40,6 +40,7 @@ pipeline {
             steps {
                 echo "Uninstalling Apache2..."
                 sh '''
+                    sudo service apache2 stop
                     sudo apt-get remove --purge -y apache2
                     sudo apt-get autoremove -y
                     sudo apt-get clean
