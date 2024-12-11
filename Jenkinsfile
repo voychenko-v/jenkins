@@ -40,7 +40,6 @@ pipeline {
         stage('Uninstall Apache') {
             steps {
                 echo "Uninstalling Apache2..."
-
                 sh 'sudo service apache2 stop'
                 sh 'sudo apt-get remove --purge -y apache2'
                 sh 'sudo apt-get autoremove -y'
