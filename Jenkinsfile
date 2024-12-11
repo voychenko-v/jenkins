@@ -1,16 +1,5 @@
 pipeline {
     agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('List Files') {
-            steps {
-                sh 'ls -R'
-            }
-        }
         stage('Install Apache') {
             steps {
                 script {
@@ -39,7 +28,7 @@ pipeline {
             steps {
                 sh 'ls -l ./check_error_status_code.sh'
                 sh 'chmod +x ./check_error_status_code.sh'
-                sh './check_error_status_code.sh'
+                sh './check_error_staus_code.sh'
 
             }
         }
