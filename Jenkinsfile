@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    stages {
         stage('Install Apache') {
             steps {
                 script {
@@ -18,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Requests') {
+        stage('Test requests') {
             steps {
                 sh 'curl -I http://localhost '
                 sh 'curl -I http://localhost/error'
@@ -26,9 +27,8 @@ pipeline {
         }
         stage('Check Error Status') {
             steps {
-                sh 'ls -l ./check_error_status_code.sh'
                 sh 'chmod +x ./check_error_status_code.sh'
-                sh './check_error_staus_code.sh'
+                sh './check_error_status_code.sh'
 
             }
         }
