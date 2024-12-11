@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh 'ls /var/log/apache2/'
             }
+        }
         stage('Check Error Status') {
             steps {
                 sh 'chmod +x ./check_error_staus_code.sh'
