@@ -21,8 +21,9 @@ pipeline {
         }
         stage('Test requests') {
             steps {
-                sh 'curl -I http://localhost '
-                sh 'curl -I http://localhost/error'
+                sh 'curl -I http://localhost' // 200
+                sh 'curl -I http://localhost/error' // 404
+                sh 'curl -I http:/192.168.1.200' // 500
             }
         }
         stage('Check logs') {
@@ -34,7 +35,16 @@ pipeline {
             steps {
                 sh 'chmod +x ./check_error_staus_code.sh'
                 sh './check_error_staus_code.sh'
-
+            }
+        }
+        stage('Uninstall Apache') {
+            steps {
+                echo "Uninstalling Apache2..."
+                sh '''
+                    sudo apt-get remove --purge -y apache2
+                    sudo apt-get autoremove -y
+                    sudo apt-get clean
+                '''
             }
         }
     }
