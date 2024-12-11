@@ -1,16 +1,27 @@
 pipeline {
     agent any
     stages {
-        stage('Instal Apache') {
+        stage('Install Apache') {
             steps {
-                sh 'sudo apt install apache2'
+                sh '''
+                    sudo apt update
+                    sudo apt install -y apache2
+                '''
             }
         }
-        stage('Chec status') {
+        stage('Requests') {
             steps {
-                sh './check_error_status_code.sh'
+                sh 'curl -I http://localhost '
+                sh 'curl -I http://localhost/error'
             }
         }
-
+        stage('Check Error Status') {
+            steps {
+                sh '''
+                    chmod +x ./check_error_status_code.sh
+                    ./check_error_status_code.sh
+                '''
+            }
+        }
     }
 }
