@@ -21,6 +21,7 @@ pipeline {
         }
         stage('Test requests') {
             steps {
+                sh 'sudo service apache2 start'
                 sh 'curl -I http://localhost' // 200
                 sh 'curl -I http://localhost/error' // 404
             }
@@ -39,12 +40,12 @@ pipeline {
         stage('Uninstall Apache') {
             steps {
                 echo "Uninstalling Apache2..."
-                sh '''
-                    sudo service apache2 stop
-                    sudo apt-get remove --purge -y apache2
-                    sudo apt-get autoremove -y
-                    sudo apt-get clean
-                '''
+
+                sh 'sudo service apache2 stop'
+                sh 'sudo apt-get remove --purge -y apache2'
+                sh 'sudo apt-get autoremove -y'
+                sh 'sudo apt-get clean'
+
             }
         }
     }
