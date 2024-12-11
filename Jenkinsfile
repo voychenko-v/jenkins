@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Check logs') {
             steps {
-                sh 'ls /var/log/apache2/'
+                sh 'sudo ls /var/log/apache2/'
             }
         }
         stage('Check Error Status') {
