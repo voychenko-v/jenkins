@@ -6,6 +6,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('List Files') {
+            steps {
+                sh 'ls -R'
+            }
+        }
         stage('Install Apache') {
             steps {
                 script {
