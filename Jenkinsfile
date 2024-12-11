@@ -3,9 +3,20 @@ pipeline {
     stages {
         stage('Install Apache') {
             steps {
-                sh 'sudo apt update'
-                sh 'sudo apt install -y apache2'
+                script {
 
+                    def apacheInstalled = sh(script: 'dpkg -l | grep apache2', returnStatus: true)
+                    
+                    if (apacheInstalled != 0) {
+                        echo "Apache2 is not installed. Installing Apache..."
+                        sh '''
+                            sudo apt-get update
+                            sudo apt-get install -y apache2
+                        '''
+                    } else {
+                        echo "Apache2 is already installed."
+                    }
+                }
             }
         }
         stage('Requests') {
