@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Check Error Status') {
             steps {
-                sh 'chmod +x ./check_error_status_code.sh'
+                sh 'chmod +x ./check_error_staus_code.sh'
                 sh './check_error_status_code.sh'
 
             }
