@@ -23,7 +23,6 @@ pipeline {
             steps {
                 sh 'curl -I http://localhost' // 200
                 sh 'curl -I http://localhost/error' // 404
-                sh 'curl -I http:/192.168.1.200' // 500
             }
         }
         stage('Check logs') {
